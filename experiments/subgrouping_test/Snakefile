@@ -36,8 +36,6 @@ rule test:
     threads: 8
 
     shell: """
-        set +u; source activate research; set -u;
-
         export OMP_NUM_THREADS=1;
         sleep $(( ({wildcards.cv_id} + 1) * ({wildcards.task_id} + 1)
                 * $(shuf -i 1-9 -n 1) ));
@@ -57,8 +55,6 @@ rule gather:
     threads: 12
 
     shell: """
-        set +u; source activate research; set -u;
-
         tasks={wildcards.tasks}
         python -m dryads-research.experiments.subgrouping_test.gather_test \
                 {TMPDIR} --task_ids ${{tasks//-/ }}
@@ -79,7 +75,6 @@ rule merge:
     threads: 1
 
     shell:"""
-        set +u; source activate research; set -u;
         python -m dryads-research.experiments.subgrouping_test.merge_test \
                 {TMPDIR}
 
@@ -102,4 +97,3 @@ rule merge:
                 {config[mut_levels]} {config[classif]}
 
         """
-
