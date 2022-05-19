@@ -191,7 +191,7 @@ def main():
     coh_list = list_cohorts('Firehose', expr_dir=expr_sources['Firehose'],
                             copy_dir=expr_sources['Firehose'])
     coh_list -= {args.cohort}
-    coh_list |= {'METABRIC', 'beatAML', 'CCLE'}
+    coh_list |= {'METABRIC', 'CCLE'}
 
     # initiate set of genetic expression features, reset random seed
     coh_dir = os.path.join(args.out_dir.split('subgrouping_test')[0],

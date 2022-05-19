@@ -141,11 +141,7 @@ eval "$( tail -n 1 setup/tasks.txt )"
 dvc run -d setup/muts-list.p -d $RUNDIR/fit_test.py -O out-conf.p.gz \
 	-O $FINALDIR/out-trnsf__${mut_levels}__${classif}.p.gz -f output.dvc \
 	--overwrite-dvcfile --ignore-build-cache 'snakemake -s $RUNDIR/Snakefile \
-	-j 800 --latency-wait 120 --cluster-config $RUNDIR/cluster.json \
-	--cluster "sbatch -p {cluster.partition} -J {cluster.job-name} \
-	-t {cluster.time} -o {cluster.output} -e {cluster.error} \
-	-n {cluster.ntasks} -c {cluster.cpus-per-task} \
-	--mem-per-cpu {cluster.mem-per-cpu} --exclude=$ex_nodes --no-requeue" \
+	-j 800 --latency-wait 120 \
 	--config expr_source='"$expr_source"' cohort='"$cohort"' \
 	samp_cutoff='"$samp_cutoff"' mut_levels='"$mut_levels"' \
 	classif='"$classif"' time_max='"$run_time"' merge_max='"$merge_time"
